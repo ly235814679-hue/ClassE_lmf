@@ -1,0 +1,52 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/tmp/CMakeFiles/ClassE_lmf+ClassE_lmf"
+		},
+		{
+			"file" : "D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/tmp/CMakeFiles/ClassE_lmf+ClassE_lmf.rule"
+		},
+		{
+			"file" : "D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/tmp/CMakeFiles/ClassE_lmf+ClassE_lmf-complete.rule"
+		},
+		{
+			"file" : "D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/tmp/ClassE_lmf+ClassE_lmf/src/ClassE_lmf+ClassE_lmf-stamp/ClassE_lmf+ClassE_lmf-build.rule"
+		},
+		{
+			"file" : "D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/tmp/ClassE_lmf+ClassE_lmf/src/ClassE_lmf+ClassE_lmf-stamp/ClassE_lmf+ClassE_lmf-configure.rule"
+		},
+		{
+			"file" : "D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/tmp/ClassE_lmf+ClassE_lmf/src/ClassE_lmf+ClassE_lmf-stamp/ClassE_lmf+ClassE_lmf-database.rule"
+		},
+		{
+			"file" : "D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/tmp/ClassE_lmf+ClassE_lmf/src/ClassE_lmf+ClassE_lmf-stamp/ClassE_lmf+ClassE_lmf-download.rule"
+		},
+		{
+			"file" : "D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/tmp/ClassE_lmf+ClassE_lmf/src/ClassE_lmf+ClassE_lmf-stamp/ClassE_lmf+ClassE_lmf-executes.rule"
+		},
+		{
+			"file" : "D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/tmp/ClassE_lmf+ClassE_lmf/src/ClassE_lmf+ClassE_lmf-stamp/ClassE_lmf+ClassE_lmf-install.rule"
+		},
+		{
+			"file" : "D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/tmp/ClassE_lmf+ClassE_lmf/src/ClassE_lmf+ClassE_lmf-stamp/ClassE_lmf+ClassE_lmf-mkdir.rule"
+		},
+		{
+			"file" : "D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/tmp/ClassE_lmf+ClassE_lmf/src/ClassE_lmf+ClassE_lmf-stamp/ClassE_lmf+ClassE_lmf-patch.rule"
+		},
+		{
+			"file" : "D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/tmp/ClassE_lmf+ClassE_lmf/src/ClassE_lmf+ClassE_lmf-stamp/ClassE_lmf+ClassE_lmf-test.rule"
+		},
+		{
+			"file" : "D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/tmp/ClassE_lmf+ClassE_lmf/src/ClassE_lmf+ClassE_lmf-stamp/ClassE_lmf+ClassE_lmf-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"ClassE_lmf+ClassE_lmf"
+		],
+		"name" : "ClassE_lmf+ClassE_lmf"
+	}
+}

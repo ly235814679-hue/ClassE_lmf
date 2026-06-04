@@ -1,0 +1,5 @@
+{
+    "clangd.arguments": [
+        "--compile-commands-dir=d:\\STDemoProject\\F103_ClassE_LMF_Demo\\ClassE_lmf\\MDK-ARM\\out\\ClassE_lmf\\ClassE_lmf"
+    ]
+}

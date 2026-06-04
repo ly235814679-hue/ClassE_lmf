@@ -1,0 +1,21 @@
+build-idx:
+  generated-by: csolution version 2.12.0+p41-gfeadfc5e
+  csolution: ClassE_lmf.csolution.yml
+  cbuild-run: out/ClassE_lmf+ClassE_lmf.cbuild-run.yml
+  tmpdir: tmp
+  cprojects:
+    - cproject: ClassE_lmf.cproject.yml
+  cbuilds:
+    - cbuild: out/ClassE_lmf/ClassE_lmf/ClassE_lmf+ClassE_lmf.cbuild.yml
+      project: ClassE_lmf
+      configuration: +ClassE_lmf
+      messages:
+        warnings:
+          - file 'D:/STDemoProject/F103_ClassE_LMF_Demo/ClassE_lmf/MDK-ARM/.cmsis/ClassE_lmf+ClassE_lmf.dbgconf' not found; use --update-rte
+        info:
+          - ClassE_lmf.cbuild-pack.yml - file generated successfully
+          - ClassE_lmf+ClassE_lmf.cbuild-run.yml - file generated successfully
+          - ClassE_lmf+ClassE_lmf.cbuild.yml - file generated successfully
+      packs-unused:
+        - pack: ARM::CMSIS-DSP@1.16.2
+        - pack: ARM::CMSIS-NN@4.1.0
