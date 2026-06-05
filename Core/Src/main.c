@@ -68,7 +68,8 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+  uint32_t sum_view;
+  uint16_t adc_code;
 /* USER CODE END 0 */
 
 /**
@@ -110,19 +111,21 @@ int main(void)
   MX_TIM3_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  bsp_multibutton_Init();                         //³õÊ¼»¯°´¼ü
-    app_event_init();                             //³õÊ¼»¯ÏûÏ¢»·ÐÎ»º³åÇø
-    Fan_SetSpeed_PID_Turn_Off(&htim3,0.9f);       //·çÉÈ³õÊ¼»¯
-    Relay_Init();                                 //¼ÌµçÆ÷³õÊ¼»¯
-    BSP_SoftTimer_Init();                         //³õÊ¼»¯Èí¼þ¶¨Ê±Æ÷²¢´´½¨Á½¸öÈÎÎñ
-    Sys_Ctrl_Init();                              //³õÊ¼»¯ÉäÆµ¿ª¹ØºÍ¹¦·Å¿ª¹Ø£¬Ä¬ÈÏ¹Ø±Õ
+  bsp_multibutton_Init();                         //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    app_event_init();                             //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½
+    Fan_SetSpeed_PID_Turn_Off(&htim3,0.9f);       //ï¿½ï¿½ï¿½È³ï¿½Ê¼ï¿½ï¿½
+    Relay_Init();                                 //ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
+    BSP_SoftTimer_Init();                         //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    Sys_Ctrl_Init();                              //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ØºÍ¹ï¿½ï¿½Å¿ï¿½ï¿½Ø£ï¿½Ä¬ï¿½Ï¹Ø±ï¿½
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_RESET);
-
-//  ADC_Sin_Test_Start(); //Æô¶¯²âÊÔ
+  HAL_ADCEx_Calibration_Start(&hadc1);
+  Sys_Start();
+  Relay_Set_Combination(13);
+//  ADC_Sin_Test_Start(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   
 
 
@@ -133,9 +136,10 @@ int main(void)
 
     /* USER CODE BEGIN 3 */          
         
-        app_event_process();
-        BSP_SoftTimer_Process();
-
+    app_event_process();
+    BSP_SoftTimer_Process();
+      
+    // adc_code = Get_ADC_Average(ADC_CHANNEL_1);
       
   }
   /* USER CODE END 3 */
