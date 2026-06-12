@@ -123,8 +123,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_RESET);
   HAL_ADCEx_Calibration_Start(&hadc1);
-  Sys_Start();
-  Relay_Set_Combination(13);
+  //Sys_Start();
+//  Relay_Set_Combination(13);
 //  ADC_Sin_Test_Start(); //��������
   
 

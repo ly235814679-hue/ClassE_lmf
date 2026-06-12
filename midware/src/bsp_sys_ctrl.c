@@ -56,9 +56,9 @@ void Cool_Pulse_ctr(uint8_t Pulse_count)
         HAL_Delay(200);
         led1_toggle();
         HAL_GPIO_WritePin(GPIOB, USER_IO3_Pin, GPIO_PIN_SET);
-        SIG_ON();
+        Sys_Start();
         HAL_Delay(50);
-        SIG_OFF();
+        Sys_Stop();】
         HAL_GPIO_WritePin(GPIOB, USER_IO3_Pin, GPIO_PIN_RESET);
     }
 

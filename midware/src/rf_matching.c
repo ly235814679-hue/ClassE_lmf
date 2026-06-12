@@ -75,33 +75,34 @@ static float Voltage_to_dbm(uint16_t adc_raw) {
 }
 
 
+
 /**
- * @brief 私有函数，通过线性功率（W/mW）计算驻波比 (VSWR)
- * * @param p_forward  前向功率 (单位必须与反向功率一致，如均为 W 或 mW)
- * @param p_reflect  反向功率 (单位必须与前向功率一致)
- * @return float     驻波比 (VSWR) 数值，范围 [1.0, 稳定趋于正无穷]
+ * @brief  私有函数，通过前向和反向功率 (dBm) 计算驻波比 (VSWR)
+ * @note   允许输出负值以表征 P_ref > P_fwd 的硬件异常状态
+ * @param  p_forward_dbm  前向功率 (单位: dBm)
+ * @param  p_reflect_dbm  反向功率 (单位: dBm)
+ * @return float          驻波比 (VSWR)。正常为 >= 1.0，异常时为负数。
  */
-static float Calculate_VSWR_Linear(float p_forward, float p_reflect) {
-    // 边界条件处理
-//    if (p_forward <= 0.0f) {
-//        return 99.9f; // 如果没有前向功率，返回一个代表极大驻波的错误值
-//    }
-//    if (p_reflect <= 0.0f) {
-//        return 1.0f;  // 理论上无反射时，驻波比为 1.0
-//    }
-//    if (p_reflect >= p_forward) {
-//        return 99.9f; // 全反射或数据异常
-//    }
+static float Calculate_VSWR_From_dBm(float p_forward_dbm, float p_reflect_dbm) {
+    // 1. 计算回波损耗 Return Loss (RL)
+    float rl_db = p_forward_dbm - p_reflect_dbm;
 
-    // 计算电压反射系数 |Gamma| = sqrt(P_reflect / P_forward)
-    float gamma = sqrtf(p_reflect / p_forward);
+    // 2. 致命异常保护：完全相等会导致 Gamma=1，引发除零崩溃
+    // 使用 fabsf 容忍极小的浮点误差
+    if (fabsf(rl_db) < 0.001f) {
+        return 999.0f; // 理论上此时驻波无穷大
+    }
 
-    // 计算 VSWR = (1 + |Gamma|) / (1 - |Gamma|)
+    // 3. 计算电压反射系数 |Gamma|
+    // 若 rl_db 为负数（反向 > 前向），算出的 gamma 将大于 1.0
+    float gamma = powf(10.0f, -rl_db / 20.0f);
+
+    // 4. 计算并返回 VSWR
+    // 当 gamma > 1.0 时，分母为负数，此处自然会产生负的驻波比供你观察
     float vswr = (1.0f + gamma) / (1.0f - gamma);
     
     return vswr;
 }
-
 
 /**
  * @brief  自动遍历继电器组合，寻找反射功率最小的最佳点
@@ -134,13 +135,17 @@ HAL_StatusTypeDef RF_Matching_Optimize(void) {
        fwd_raw = Voltage_to_dbm(ADC_0);
        ref_raw = Voltage_to_dbm(ADC_1);      
 
-       // --- 步骤 D: 计算并比较 ---
-       float vswr = Calculate_VSWR_Linear(fwd_raw, ref_raw);
-       vswr_viewer =   vswr;
-       if (vswr < Best_vswr) {
-           Best_vswr = vswr;
-           best_comb = count;
-       } 
+        // --- 步骤 D: 计算并比较 ---
+        float vswr_current = Calculate_VSWR_From_dBm(fwd_raw, ref_raw);
+
+        // 透传给全局变量，如果出现负数（如 -14），你在调试界面能直接看到这种异常
+        vswr_viewer = vswr_current; 
+
+        // 核心修正：只有当驻波比是物理上合理的有效值（>= 1.0）时，才参与“最佳”比较
+        if (vswr_current >= 1.0f && vswr_current < Best_vswr) {
+            Best_vswr = vswr_current;
+            best_comb = count;
+        }
 
        // --- 步骤 E: 关闭射频，准备下一次切换 ---
        Sys_Stop();
